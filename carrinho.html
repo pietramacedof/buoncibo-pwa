@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ptbr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="carrinho.css">
+  <title>Carrinho</title>
+  <link rel="shortcut icon" href="assets/pizza (6).png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+
+<body>
+  <header id="menu">
+    <section id="sectionheader">
+      <div id="homeHeader">
+        <a href="index.html"> <img src="elementos/logo.png" alt="Home" id="home" /></a>
+      </div>
+      <div id="headerEnd">
+        <a class="textdecoration" href="cardapio.html">
+          <h2>Nossas Pizzas</h2>
+        </a>
+        <a class="textdecoration" href="sobre.html">
+          <h2>Sobre Nós</h2>
+        </a>
+        <a href="carrinho.html" class="textdecoration">
+          <h2>Carrinho</h2>
+        </a>
+        <a class="textdecoration" href="login.html">
+          <h2>Entrar</h2>
+        </a>
+      </div>
+    </section>
+  </header>
+  <section class="container" id="emptyCart">
+    <div class="form-container">
+      <div class="content-info">
+        <p class="carrinho-vazio"> SEU CARRINHO ESTÁ VAZIO</p>
+        <p class="conta-opacity">Navegue pelo nosso cardapio para adicionar itens <br> ao seu carrinho</p>
+        <img class="carrinho" src="assets/carrinho-vazio (1).png">
+        <div class="container-button">
+          <a href="cardapio.html"><button type="submit" class="botao">Adicionar Itens</button></a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="body-carrinho">
+    <div class="pedidos">
+      <div class="position">
+        <div class="descrition">
+          <h3>Itens do pedido</h3>
+        </div>
+        <div class="button-compra">
+         <a href="cardapio.html"> <button>Continuar Comprando</button></a>
+        </div>
+      </div>
+      <div id="itensPedido"></div>
+    </div>
+    <div class="total">
+      <div class="position">
+        <div class="descrition">
+          <h3>Resumo do Pedido</h3>
+        </div>
+        
+      </div>
+      <div class="resumo-pedido">
+        <div class="cont-preco">
+          <p>Total:</p>
+          <p id="cont-preco-id">R$30,00</p>
+        </div>
+          <div class="finalizar">
+            <button>Finalizar pedido  <i class="fa-solid fa-cart-shopping"></i> </button>
+           
+          </div>
+        </div>
+
+    </div>
+  </section>
+  <footer class="footer-father">
+    <div class="footer-div">
+      <img src="assets/pizza (7).png" alt="Buon Cibo" class="img-footer">
+      <hr width="800px">
+      <p class="pfooter">Nos acompanhe nas redes sociais.</p>
+      <div class="container-footer">
+        <a href=""><img src="assets/facebook (4).png" alt="Facebook" class="icon-footer"></a>
+        <a href=""><img src="assets/instagram (2).png" alt="Instagram" class="icon-footer"></a>
+        <a href=""><img src="assets/twitter (4).png" alt="Twitter" class="icon-footer"></a>
+        <a href=""><img src="assets/whatsapp.png" alt="WhatsApp" class="icon-footer"></a>
+      </div>
+      <p id="paragrafo-footer">© Buon Cibo S.A | Todos os direitos reservados 2023 | CNPJ 00.000.000/0000-00</p>
+    </div>
+  </footer>
+  <script src="./jquery.js"></script>
+  <script>
+    $(document).ready(function () {
+      var carrinhoLocal = JSON.parse(localStorage.getItem("carrinho")) || [];
+      console.log(carrinhoLocal)
+      $('body').on('click', '.subItem', function (event) {
+        event.preventDefault();
+        const subItem = $(this).closest(".subItem");
+        const id = subItem.data("id");
+        const currentValue = $(".selector-amount[data-id='" + id + "']").val();
+        const currentValueToNumber = parseInt(currentValue)
+        if (currentValueToNumber > 1)
+          $(".selector-amount[data-id='" + id + "']").val(currentValueToNumber - 1);
+          const index = carrinhoLocal.findIndex((element) => element.id === id);
+        if (index !== -1) {
+          carrinhoLocal[index].quantidade -= 1;
+        }
+        localStorage.setItem("carrinho", JSON.stringify(carrinhoLocal));
+        let newTotal = carrinhoLocal[index].quantidade * carrinhoLocal[index].preco;
+        $(".subtotal[data-id='" + id + "']").html(newTotal.toFixed(2));
+        if(carrinhoLocal[index].quantidade < 1){
+          carrinhoLocal.splice(index, 1);
+          //$(".pizza-container[data-id='" + id + "']").hide();
+          localStorage.setItem("carrinho", JSON.stringify(carrinhoLocal));
+        }
+        atualizarCarrinho();
+      });
+
+      $('body').on('click', '.addItem', function (event) {
+        event.preventDefault();
+        const addItem = $(this).closest(".addItem");
+        const id = addItem.data("id");
+        const currentValue = $(".selector-amount[data-id='" + id + "']").val();
+        const currentValueToNumber = parseInt(currentValue)
+        $(".selector-amount[data-id='" + id + "']").val(currentValueToNumber + 1);
+        const index = carrinhoLocal.findIndex((element) => element.id === id);
+        if (index !== -1) {
+          carrinhoLocal[index].quantidade += 1;
+        }
+        localStorage.setItem("carrinho", JSON.stringify(carrinhoLocal));
+        let newTotal = carrinhoLocal[index].quantidade * carrinhoLocal[index].preco;
+        $(".subtotal[data-id='" + id + "']").html(newTotal.toFixed(2));
+        atualizarCarrinho();
+      });
+
+      $('body').on('click', '.removeItem', function (event) {
+        event.preventDefault();
+        const subItem = $(this).closest(".removeItem");
+        const id = subItem.data("id");
+        const index = carrinhoLocal.findIndex((element) => element.id === id);
+        if (index !== -1) {
+          carrinhoLocal.splice(index, 1);
+          localStorage.setItem("carrinho", JSON.stringify(carrinhoLocal));
+          atualizarCarrinho()
+        }
+      });
+
+      function atualizarCarrinho() {
+        let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+        if (carrinho.length > 0) $("#emptyCart").hide();
+        else  $("#emptyCart").show();
+        if(carrinho.length === 0) $(".body-carrinho").hide();
+        else $(".body-carrinho").show()
+        const carrinhoDiv = $("#itensPedido");
+        carrinhoDiv.empty();
+        let total = 0;
+        //<li>${item.nome} - R$ ${item.preco} x ${item.quantidade} = R$ ${subtotal.toFixed(2)}</li>
+        carrinho.forEach(item => {
+          const subtotal = item.preco * item.quantidade;
+          total += subtotal;
+          carrinhoDiv.append(`<div class="pizza-container" data-id="${item.id}"> 
+          <div class="pizza-buy">
+            <img src="${item.img}" alt="pizza">
+            <p>${item.nome}</p>
+          </div>
+          <div class="pizza-descrition">
+            <button style="border: 0; background-color: transparent" class="removeItem" data-id="${item.id}"><i class="fa-regular fa-trash-can"></i></button>
+            <form class="quantidade">
+              <button class="sub  subItem" data-id="${item.id}">
+                <i class="fa-solid fa-minus"></i>
+              </button>
+              <input class="selector-amount" type="number" value="${item.quantidade}" data-id="${item.id}">
+              <button class="sub2 addItem" data-id="${item.id}">
+                <i class="fa-solid fa-plus"></i></i>
+              </button>
+            </form>
+            <p> R$${item.preco.toFixed(2)}<br>
+              <small>Subtotal: R$<span class="subtotal" data-id="${item.id}">${subtotal.toFixed(2)}</span></small>
+              </p>
+          </div>
+        </div>`);
+        });
+
+        $("#cont-preco-id").html(`R$${total.toFixed(2)}`)
+      }
+      // Carregar carrinho ao carregar a página
+      atualizarCarrinho();
+    });
+  </script>
+</body>
+
+</html>

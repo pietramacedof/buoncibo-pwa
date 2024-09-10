@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buon Cibo</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="./elementos/pizza (7).png" type="image/x-icon">
+    <link rel="manifest" href="./manifest.json">
+    <script>
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then((registration) => {
+          console.log('Service Worker registrado com sucesso:', registration);
+        })
+        .catch((error) => {
+          console.error('Falha ao registrar o Service Worker:', error);
+        });
+    });
+  }
+    </script>
+  </head>
+  <body>
+    <header id="menu">
+      <section id="sectionheader">
+        <div id="homeHeader">
+          <a href="index.html"> <img src="./elementos/logo.png" alt="Home" id="home" /></a>
+        </div>
+        <div id="headerEnd">
+          <a  href="cardapio.html" class="textdecoration">
+            <h2>Nossas Pizzas</h2>
+          </a>
+          <a href="sobre.html" class="textdecoration">
+            <h2>Sobre Nós</h2>
+          </a>
+          <a href="carrinho.html" class="textdecoration">
+            <h2>Carrinho</h2>
+          </a>
+          <a href="login.html" class="textdecoration" >
+            <h2>Entrar</h2>
+          </a>
+        </div>
+      </section>
+    </header>
+    <section class="info-header">
+      <div class="container">
+        <div class="text-description-main">
+          <h3>Todas as suas comidas preferidas reunidas em um só lugar.</h3>
+          <p>
+            Primeira vez por aqui? <br />
+            Cadastre-se e garanta 15% de desconto na primeira compra.
+          </p>
+         <a href="cadastro.html"><button class="buttonCadastro">Cadastre-se</button></a>
+        </div>
+        <div>
+          <img src="./elementos/pizzahome.png" alt="" class="imghome" />
+        </div>
+      </div>
+    </section>
+    <footer class="footer-father">
+      <div class="footer-div">
+        <img src="./elementos/pizza (7).png" alt="Buon Cibo" class="img-footer" />
+        <hr width="800px" />
+        <p class="pfooter">Nos acompanhe nas redes sociais.</p>
+        <div class="container-footer">
+          <a href=""
+            ><img src="./elementos/facebook (4).png" alt="Facebook" class="icon-footer"
+          /></a>
+          <a href=""
+            ><img src="./elementos/instagram (2).png" alt="Instagram" class="icon-footer"
+          /></a>
+          <a href=""
+            ><img src="./elementos/twitter (4).png" alt="Twitter" class="icon-footer"
+          /></a>
+          <a href=""
+            ><img src="./elementos/whatsapp.png" alt="WhatsApp" class="icon-footer"
+          /></a>
+        </div>
+        <p id="paragrafo-footer">
+          © Buon Cibo S.A | Todos os direitos reservados 2023 | CNPJ
+          00.000.000/0000-00
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

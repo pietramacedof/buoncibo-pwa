@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="shortcut icon" href="./elementos/pizza (7).png" type="image/x-icon" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <script type="text/javascript" src="script.js"></script>
+  </head>
+
+  <body>
+    <header id="menu">
+      <section id="sectionheader">
+        <div id="homeHeader">
+          <a href="index.html"> <img src="elementos/logo.png" alt="Home" id="home" /></a>
+        </div>
+        <div id="headerEnd">
+          <a  href="cardapio.html" class="textdecoration">
+            <h2>Nossas Pizzas</h2>
+          </a>
+          <a href="sobre.html" class="textdecoration">
+            <h2>Sobre Nós</h2>
+          </a>
+          <a href="carrinho.html" class="textdecoration">
+            <h2>Carrinho</h2>
+          </a>
+          <a href="login.html" class="textdecoration" >
+            <h2>Entrar</h2>
+          </a>
+        </div>
+      </section>
+    </header>
+    <section class="container-login">
+      <div class="login-header"></div>
+      <div class="white-login">
+        <div class="login">
+          <div class="conteudo">
+            <h1 class="form-h1">Acessar Minha Conta</h1>
+            <div class="form">
+              <form method="post" action="">
+                <div class="line-13"></div>
+                <label for="User">
+                  <input class="user" type="email" placeholder="E-mail"
+                /></label>
+                <div class="line-14"></div>
+                <label for="Password" class="label-show-password">
+                  <input
+                    class="password "
+                    id="password"
+                    type="password"
+                    placeholder="Senha"
+                />
+                <i
+                  class="bi bi-eye icon show-password"
+                  id="btn-senha"
+                  onclick="mostrarsenha()"
+                ></i>
+              </form>
+              </label>
+            </div>
+            <div class="button-login">
+              <button class="entrar">Entrar</button>
+              <a href="" class="recover-password">Esqueci minha senha</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grey-login">
+        <p class="grey-p">Ainda não está cadastrado(a)?</p>
+        <div class="grey-aux">
+         <a href="cadastro.html"><button class="grey-button">Cadastre-se</button></a>
+        </div>
+      </div>
+    </section>
+    <footer class="footer-father">
+      <div class="footer-div">
+        <img src="elementos/pizza (7).png" alt="Buon Cibo" class="img-footer" />
+        <hr width="800px" />
+        <p class="pfooter">Nos acompanhe nas redes sociais.</p>
+        <div class="container-footer">
+          <a href=""
+            ><img src="elementos/facebook (4).png" alt="Facebook" class="icon-footer"
+          /></a>
+          <a href=""
+            ><img src="elementos/instagram (2).png" alt="Instagram" class="icon-footer"
+          /></a>
+          <a href=""
+            ><img src="elementos/twitter (4).png" alt="Twitter" class="icon-footer"
+          /></a>
+          <a href=""
+            ><img src="elementos/whatsapp.png" alt="WhatsApp" class="icon-footer"
+          /></a>
+        </div>
+        <p id="paragrafo-footer">
+          © Buon Cibo S.A | Todos os direitos reservados 2023 | CNPJ
+          00.000.000/0000-00
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
